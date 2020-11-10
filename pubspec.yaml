@@ -26,6 +26,8 @@ dependencies:
 
   #屏幕适配
   flutter_screenutil: ^3.1.0
+  #提示
+  fluttertoast: ^7.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -97,38 +97,41 @@ class _WelcomePageState extends State<WelcomePage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(duSetWidth(6))),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/sign_in');
+        },
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: Size(375, 734), allowFontScaling: false);
+    ScreenUtil.init(context,
+        designSize: Size(375, 734), allowFontScaling: false);
     return Scaffold(
       body: Center(
           child: Column(
-            children: <Widget>[
-              _buildPageHeadTitle(),
-              _buildPageHeadDetail(),
-              _buildFeatureItem(
-                "feature-1",
-                "Compelling photography and typography provide a beautiful reading",
-                86,
-              ),
-              _buildFeatureItem(
-                "feature-2",
-                "Sector news never shares your personal data with advertisers or publishers",
-                40,
-              ),
-              _buildFeatureItem(
-                "feature-3",
-                "You can get Premium to unlock hundreds of publications",
-                40,
-              ),
-              Spacer(),
-              _buildStartButton(),
-            ],
+        children: <Widget>[
+          _buildPageHeadTitle(),
+          _buildPageHeadDetail(),
+          _buildFeatureItem(
+            "feature-1",
+            "Compelling photography and typography provide a beautiful reading",
+            80,
+          ),
+          _buildFeatureItem(
+            "feature-2",
+            "Sector news never shares your personal data with advertisers or publishers",
+            40,
+          ),
+          _buildFeatureItem(
+            "feature-3",
+            "You can get Premium to unlock hundreds of publications",
+            40,
+          ),
+          Spacer(),
+          _buildStartButton(),
+        ],
       )),
     );
   }
