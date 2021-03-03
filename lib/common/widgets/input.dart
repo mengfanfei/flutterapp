@@ -18,7 +18,9 @@ Widget inputTextEdit({
     ),
     child: TextField(
       controller: controller,
+      /// keyboardType参数控制软键盘的类型
       keyboardType: keyboardType,
+      /// decoration是TextField组件的装饰（外观）参数，类型是InputDecoration。
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 10),

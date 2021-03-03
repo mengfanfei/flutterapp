@@ -10,12 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Flutter News',
         theme: ThemeData(
           primarySwatch: Colors.pink,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: staticRoutes,
-        home: WelcomePage());
+        debugShowCheckedModeBanner: false,
+        home: WelcomePage(),
+    );
   }
 }

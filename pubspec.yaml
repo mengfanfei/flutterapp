@@ -29,6 +29,25 @@ dependencies:
   #提示
   fluttertoast: ^7.1.1
 
+  #http 通讯
+  dio: ^3.0.10 #latest version
+  cookie_jar: ^1.0.1
+  dio_cookie_manager: ^1.0.0
+
+  localstorage: ^3.0.6
+
+  # storage + cache
+  shared_preferences: ^0.5.12+4
+  cached_network_image: ^2.5.0
+
+  # 加密安全 SHA
+  crypto: ^2.1.5
+
+  #状态管理
+  provider: ^4.3.2+3
+
+
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

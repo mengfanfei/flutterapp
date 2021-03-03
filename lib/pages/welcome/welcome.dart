@@ -9,10 +9,10 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  /// 页头标题
+  // 页头标题
   Widget _buildPageHeadTitle() {
     return Container(
-      margin: EdgeInsets.only(top: duSetHeight(60)),
+      margin: EdgeInsets.only(top: duSetHeight(110)),
       child: Text(
         'Feature',
         textAlign: TextAlign.center,
@@ -26,11 +26,10 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  /// 页头说明
+  // 页头说明
   Widget _buildPageHeadDetail() {
     return Container(
       width: duSetWidth(242),
-      // height: duSetHeight(70),
       margin: EdgeInsets.only(top: duSetHeight(14)),
       child: Text(
         'The best of news channels all in one place. Trusted sources and personalized news for you',
@@ -82,12 +81,12 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  /// 开始按钮
+  // 开始按钮
   Widget _buildStartButton() {
     return Container(
       width: duSetWidth(295),
       height: duSetHeight(44),
-      margin: EdgeInsets.only(bottom: duSetHeight(30)),
+      margin: EdgeInsets.only(bottom: duSetHeight(54)),
       child: FlatButton(
         color: AppColors.primaryElement,
         textColor: AppColors.primaryElementText,
@@ -107,32 +106,33 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
-        designSize: Size(375, 734), allowFontScaling: false);
+        designSize: Size(375, 812), allowFontScaling: false);
     return Scaffold(
       body: Center(
-          child: Column(
-        children: <Widget>[
-          _buildPageHeadTitle(),
-          _buildPageHeadDetail(),
-          _buildFeatureItem(
-            "feature-1",
-            "Compelling photography and typography provide a beautiful reading",
-            80,
-          ),
-          _buildFeatureItem(
-            "feature-2",
-            "Sector news never shares your personal data with advertisers or publishers",
-            40,
-          ),
-          _buildFeatureItem(
-            "feature-3",
-            "You can get Premium to unlock hundreds of publications",
-            40,
-          ),
-          Spacer(),
-          _buildStartButton(),
-        ],
-      )),
+        child: Column(
+          children: <Widget>[
+            _buildPageHeadTitle(),
+            _buildPageHeadDetail(),
+            _buildFeatureItem(
+              "feature-1",
+              "Compelling photography and typography provide a beautiful reading",
+              80,
+            ),
+            _buildFeatureItem(
+              "feature-2",
+              "Sector news never shares your personal data with advertisers or publishers",
+              40,
+            ),
+            _buildFeatureItem(
+              "feature-3",
+              "You can get Premium to unlock hundreds of publications",
+              40,
+            ),
+            Spacer(),
+            _buildStartButton(),
+          ],
+        ),
+      ),
     );
   }
 }

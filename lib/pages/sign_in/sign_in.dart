@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_app/common/api/api.dart';
+import 'package:my_flutter_app/common/entities/entities.dart';
 import 'package:my_flutter_app/common/utils/utils.dart';
 import 'package:my_flutter_app/common/values/values.dart';
 import 'package:my_flutter_app/common/widgets/widgets.dart';
@@ -18,7 +20,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   // 执行登录操作
-  _handleSignIn() {
+  _handleSignIn() async {
     if (!duIsEmail(_emailController.value.text)) {
       toastInfo(msg: '请正确输入邮件');
       return;
@@ -27,20 +29,24 @@ class _SignInPageState extends State<SignInPage> {
       toastInfo(msg: '密码不能小于6位');
       return;
     }
+
+    UserLoginRequestEntity params = UserLoginRequestEntity(
+        email: _emailController.value.text,
+        password: duSHA256(_passController.value.text));
+    UserLoginResponseEntity res = await UserAPI.login(params: params);
+    print(res.toJson());
   }
 
   /// logo
   Widget _buildLogo() {
     return Container(
-      width: duSetWidth(110),
       margin: EdgeInsets.only(top: duSetHeight(40 + 44.0)), // 顶部系统栏 44px
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch, // 子项占满整个交叉轴
+        crossAxisAlignment: CrossAxisAlignment.center, // 子项占满整个交叉轴
         children: [
           Container(
             height: duSetWidth(76),
             width: duSetWidth(76),
-            margin: EdgeInsets.symmetric(horizontal: duSetWidth(17)),
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -55,8 +61,8 @@ class _SignInPageState extends State<SignInPage> {
                       boxShadow: [
                         Shadows.primaryShadow,
                       ],
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(duSetWidth(76 * 0.5))), // 父容器的50%
+                      // borderRadius: BorderRadius.circular(duSetWidth(76*0.5)), // 父容器的50%
+                      shape: BoxShape.circle, // 形状为圆形 ，跟上边的borderRadius同样的效果
                     ),
                     // child: Container(),
                   ),
@@ -107,7 +113,7 @@ class _SignInPageState extends State<SignInPage> {
       width: duSetWidth(295),
       margin: EdgeInsets.only(top: duSetHeight(50)),
       child: Column(
-        children: [
+        children: <Widget>[
           // email输入框
           inputTextEdit(
             controller: _emailController,
@@ -211,25 +217,28 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  /// 注册按钮
-  // Widget _buildSignUpButton() {
-  //   return Container();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            _buildLogo(),
-            _buildInputForm(),
-            Spacer(),
-            _buildThirdPartyLogin(),
-            // _buildSignUpButton(),
-          ],
+      resizeToAvoidBottomInset: false, // 是否重新计算布局空间大小
+      body: GestureDetector(
+        // 用来实现点击空白处键盘收起的功能
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              _buildLogo(), // 头部logo
+              _buildInputForm(), //登录表单
+              Spacer(), // 空间撑开
+              _buildThirdPartyLogin(), // 第三方登录按钮
+              // _buildSignUpButton(),
+            ],
+          ),
         ),
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          // 触摸收起键盘
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
       ),
     );
   }
