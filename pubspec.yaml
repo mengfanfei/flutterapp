@@ -34,11 +34,8 @@ dependencies:
   cookie_jar: ^1.0.1
   dio_cookie_manager: ^1.0.0
 
-  localstorage: ^3.0.6
-
   # storage + cache
-  shared_preferences: ^0.5.12+4
-  cached_network_image: ^2.5.0
+  shared_preferences: ^2.0.3
 
   # 加密安全 SHA
   crypto: ^2.1.5
@@ -109,3 +106,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Montserrat-SemiBold.ttf
           weight: 600
+    - family: Iconfont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf

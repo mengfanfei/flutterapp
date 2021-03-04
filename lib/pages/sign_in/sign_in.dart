@@ -4,6 +4,7 @@ import 'package:my_flutter_app/common/entities/entities.dart';
 import 'package:my_flutter_app/common/utils/utils.dart';
 import 'package:my_flutter_app/common/values/values.dart';
 import 'package:my_flutter_app/common/widgets/widgets.dart';
+import 'package:my_flutter_app/global.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -33,8 +34,8 @@ class _SignInPageState extends State<SignInPage> {
     UserLoginRequestEntity params = UserLoginRequestEntity(
         email: _emailController.value.text,
         password: duSHA256(_passController.value.text));
-    UserLoginResponseEntity res = await UserAPI.login(params: params);
-    print(res.toJson());
+    UserLoginResponseEntity userProfile = await UserAPI.login(params: params);
+    Global.saveProfile(userProfile);
   }
 
   /// logo
@@ -154,7 +155,7 @@ class _SignInPageState extends State<SignInPage> {
           Container(
             margin: EdgeInsets.only(top: duSetHeight(20)),
             height: duSetHeight(22),
-            child: FlatButton(
+            child: TextButton(
               onPressed: () => {},
               child: Text(
                 'Forgot password?',
