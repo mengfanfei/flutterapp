@@ -1,8 +1,8 @@
 
 /// 频道列表 response
 class ChannelResponseEntity {
-  String code;
-  String title;
+  String? code;
+  String? title;
 
   ChannelResponseEntity({
     this.code,

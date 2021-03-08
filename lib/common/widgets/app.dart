@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-Widget transparentAppBar({
-  @required BuildContext context,
-  Widget leading,
-  Widget title,
-  List<Widget> actions,
+AppBar transparentAppBar({
+  required BuildContext context,
+  Widget? leading,
+  Widget? title,
+  List<Widget>? actions,
 }) {
   return AppBar(
     backgroundColor: Colors.transparent,

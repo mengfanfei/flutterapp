@@ -1,7 +1,7 @@
 /// 新闻分类 response
 class CategoryResponseEntity {
-  String code;
-  String title;
+  String? code;
+  String? title;
 
   CategoryResponseEntity({
     this.code,

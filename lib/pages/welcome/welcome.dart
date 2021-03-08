@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_flutter_app/common/utils/utils.dart';
 import 'package:my_flutter_app/common/values/values.dart';
 
@@ -87,14 +86,18 @@ class _WelcomePageState extends State<WelcomePage> {
       width: duSetWidth(295),
       height: duSetHeight(44),
       margin: EdgeInsets.only(bottom: duSetHeight(54)),
-      child: FlatButton(
-        color: AppColors.primaryElement,
-        textColor: AppColors.primaryElementText,
+      child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(AppColors.primaryElement) ,
+          foregroundColor:  MaterialStateProperty.all(AppColors.primaryElementText),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(duSetWidth(6))),
+            ),
+          ),
+        ),
         child: Text(
           'Get Started',
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(duSetWidth(6))),
         ),
         onPressed: () {
           Navigator.pushNamed(context, '/sign_in');
@@ -105,8 +108,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(375, 812), allowFontScaling: false);
     return Scaffold(
       body: Center(
         child: Column(

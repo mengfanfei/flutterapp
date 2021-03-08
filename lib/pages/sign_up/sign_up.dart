@@ -78,8 +78,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Container(
             margin: EdgeInsets.only(top: duSetHeight(20)),
-            height: duSetHeight(22),
-            child: FlatButton(
+            // height: duSetHeight(22),
+            child: TextButton(
               onPressed: () => {},
               child: Text(
                 'Forgot password?',

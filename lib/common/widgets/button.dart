@@ -3,7 +3,7 @@ import 'package:my_flutter_app/common/utils/utils.dart';
 import 'package:my_flutter_app/common/values/values.dart';
 
 Widget btnFlatButtonWidget({
-  @required VoidCallback onPressed,
+  required VoidCallback onPressed,
   double width = 140,
   double height = 44,
   Color bgColor = AppColors.primaryElement,
@@ -16,19 +16,24 @@ Widget btnFlatButtonWidget({
   return Container(
     width: duSetWidth(width),
     height: duSetHeight(height),
-    child: FlatButton(
-      color: bgColor,
-      shape: RoundedRectangleBorder(borderRadius: Radii.k6pxRadius),
+    child: TextButton(
+      style: ButtonStyle(
+        alignment: Alignment.center,
+        backgroundColor: MaterialStateProperty.all(bgColor),
+        foregroundColor: MaterialStateProperty.all(fontColor),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: Radii.k6pxRadius)),
+        textStyle: MaterialStateProperty.all(
+          TextStyle(
+            fontSize: duSetFontSize(fontSize),
+            fontWeight: fontWeight,
+            fontFamily: fontFamily,
+          ),
+        ),
+      ),
       onPressed: onPressed,
       child: Text(
         title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: fontColor,
-          fontSize: duSetFontSize(fontSize),
-          fontWeight: fontWeight,
-          fontFamily: fontFamily,
-        ),
+        // textAlign: TextAlign.center,
       ),
     ),
   );
@@ -37,17 +42,21 @@ Widget btnFlatButtonWidget({
 Widget btnFlatButtonBorderOnlyWidget({
   double width = 88,
   double height = 44,
-  String iconName,
-  @required VoidCallback onPressed,
+  required String iconName,
+  required VoidCallback onPressed,
 }) {
   return Container(
     width: duSetWidth(width),
     height: duSetHeight(height),
-    child: FlatButton(
+    child: TextButton(
       child: Image.asset('assets/images/icons-$iconName.png'),
-      shape: RoundedRectangleBorder(
-        borderRadius: Radii.k6pxRadius,
-        side: Borders.primaryBorder,
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: Radii.k6pxRadius,
+            side: Borders.primaryBorder,
+          ),
+        ) ,
       ),
       onPressed: onPressed,
     ),

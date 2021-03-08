@@ -94,7 +94,6 @@ class _SignInPageState extends State<SignInPage> {
           ),
           Text(
             "news",
-            textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.primaryText,
               fontFamily: "Avenir",
@@ -154,19 +153,31 @@ class _SignInPageState extends State<SignInPage> {
           /// forgot password
           Container(
             margin: EdgeInsets.only(top: duSetHeight(20)),
-            height: duSetHeight(22),
+            // height: duSetHeight(30),
             child: TextButton(
               onPressed: () => {},
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(AppColors.secondaryElementText),
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontFamily: 'Avenir',
+                    fontWeight: FontWeight.w400,
+                    fontSize: duSetFontSize(16),
+                    height: 1,
+                  ),
+                ),
+                alignment: Alignment.center
+              ),
               child: Text(
                 'Forgot password?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.secondaryElementText,
-                  fontFamily: 'Avenir',
-                  fontWeight: FontWeight.w400,
-                  fontSize: duSetFontSize(16),
-                  height: 1,
-                ),
+                // textAlign: TextAlign.center,
+                // style: TextStyle(
+                //   color: AppColors.secondaryElementText,
+                //   fontFamily: 'Avenir',
+                //   fontWeight: FontWeight.w400,
+                //   fontSize: duSetFontSize(16),
+                //   height: 1,
+                // ),
               ),
             ),
           ),

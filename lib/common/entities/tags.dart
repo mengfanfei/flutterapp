@@ -1,10 +1,10 @@
 /// 标签列表 Request
 class TagRequestEntity {
-  String categoryCode;
-  String channelCode;
-  String tag;
-  String keyword;
-  String newsID;
+  String? categoryCode;
+  String? channelCode;
+  String? tag;
+  String? keyword;
+  String? newsID;
 
   TagRequestEntity({
     this.categoryCode,
@@ -17,7 +17,7 @@ class TagRequestEntity {
 
 /// 标签列表 Response
 class TagResponseEntity {
-  String tag;
+  String? tag;
 
   TagResponseEntity({
     this.tag,

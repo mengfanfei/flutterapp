@@ -21,7 +21,7 @@ class HttpUtil {
   static HttpUtil _instance = HttpUtil._internal();
   factory HttpUtil() => _instance;
 
-  Dio dio;
+  late Dio dio;
   CancelToken cancelToken = new CancelToken();
 
   HttpUtil._internal() {
@@ -95,30 +95,26 @@ class HttpUtil {
   // 错误信息
   ErrorEntity createErrorEntity(DioError error) {
     switch (error.type) {
-      case DioErrorType.CANCEL:
+      case DioErrorType.cancel:
         {
           return ErrorEntity(code: -1, message: "请求取消");
         }
-        break;
-      case DioErrorType.CONNECT_TIMEOUT:
+      case DioErrorType.connectTimeout:
         {
           return ErrorEntity(code: -1, message: "连接超时");
         }
-        break;
-      case DioErrorType.SEND_TIMEOUT:
+      case DioErrorType.sendTimeout:
         {
           return ErrorEntity(code: -1, message: "请求超时");
         }
-        break;
-      case DioErrorType.RECEIVE_TIMEOUT:
+      case DioErrorType.receiveTimeout:
         {
           return ErrorEntity(code: -1, message: "响应超时");
         }
-        break;
-      case DioErrorType.RESPONSE:
+      case DioErrorType.response:
         {
           try {
-            int errCode = error.response.statusCode;
+            int? errCode = error.response!.statusCode;
             // String errMsg = error.response.statusMessage;
             // return ErrorEntity(code: errCode, message: errMsg);
             switch (errCode) {
@@ -126,59 +122,49 @@ class HttpUtil {
                 {
                   return ErrorEntity(code: errCode, message: "请求语法错误");
                 }
-                break;
               case 401:
                 {
                   return ErrorEntity(code: errCode, message: "没有权限");
                 }
-                break;
               case 403:
                 {
                   return ErrorEntity(code: errCode, message: "服务器拒绝执行");
                 }
-                break;
               case 404:
                 {
                   return ErrorEntity(code: errCode, message: "无法连接服务器");
                 }
-                break;
               case 405:
                 {
                   return ErrorEntity(code: errCode, message: "请求方法被禁止");
                 }
-                break;
               case 500:
                 {
                   return ErrorEntity(code: errCode, message: "服务器内部错误");
                 }
-                break;
               case 502:
                 {
                   return ErrorEntity(code: errCode, message: "无效的请求");
                 }
-                break;
               case 503:
                 {
                   return ErrorEntity(code: errCode, message: "服务器挂了");
                 }
-                break;
               case 505:
                 {
                   return ErrorEntity(code: errCode, message: "不支持HTTP协议请求");
                 }
-                break;
               default:
                 {
                   // return ErrorEntity(code: errCode, message: "未知错误");
                   return ErrorEntity(
-                      code: errCode, message: error.response.statusMessage);
+                      code: errCode, message: error.response!.statusMessage);
                 }
             }
           } on Exception catch (_) {
             return ErrorEntity(code: -1, message: "未知错误");
           }
         }
-        break;
       default:
         {
           return ErrorEntity(code: -1, message: error.message);
@@ -197,9 +183,9 @@ class HttpUtil {
   }
 
   /// 读取本地配置
-  Map<String, dynamic> getAuthorizationHeader() {
+  Map<String, dynamic>? getAuthorizationHeader() {
     var headers;
-    String accessToken = Global.profile.accessToken;
+    String? accessToken = Global.profile.accessToken;
     if (accessToken != null) {
       headers = {
         'Authorization': 'Bearer $accessToken',
@@ -216,23 +202,23 @@ class HttpUtil {
   Future get(
       String path, {
         dynamic params,
-        Options options,
+        Options? options,
         bool refresh = false,
         bool noCache = !CACHE_ENABLE,
         bool list = false,
-        String cacheKey,
+        String? cacheKey,
       }) async {
     try {
       Options requestOptions = options ?? Options();
-      requestOptions = requestOptions.merge(extra: {
+      requestOptions = requestOptions.copyWith(extra: {
         "refresh": refresh,
         "noCache": noCache,
         "list": list,
         "cacheKey": cacheKey,
       });
-      Map<String, dynamic> _authorization = getAuthorizationHeader();
+      Map<String, dynamic>? _authorization = getAuthorizationHeader();
       if (_authorization != null) {
-        requestOptions = requestOptions.merge(headers: _authorization);
+        requestOptions = requestOptions.copyWith(headers: _authorization);
       }
 
       var response = await dio.get(path,
@@ -246,11 +232,11 @@ class HttpUtil {
   }
 
   /// restful post 操作
-  Future post(String path, {dynamic params, Options options}) async {
+  Future post(String path, {dynamic params, Options? options}) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    Map<String, dynamic>? _authorization = getAuthorizationHeader();
     if (_authorization != null) {
-      requestOptions = requestOptions.merge(headers: _authorization);
+      requestOptions = requestOptions.copyWith(headers: _authorization);
     }
     var response = await dio.post(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
@@ -258,11 +244,11 @@ class HttpUtil {
   }
 
   /// restful put 操作
-  Future put(String path, {dynamic params, Options options}) async {
+  Future put(String path, {dynamic params, Options? options}) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    Map<String, dynamic>? _authorization = getAuthorizationHeader();
     if (_authorization != null) {
-      requestOptions = requestOptions.merge(headers: _authorization);
+      requestOptions = requestOptions.copyWith(headers: _authorization);
     }
     var response = await dio.put(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
@@ -270,11 +256,11 @@ class HttpUtil {
   }
 
   /// restful patch 操作
-  Future patch(String path, {dynamic params, Options options}) async {
+  Future patch(String path, {dynamic params, Options? options}) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    Map<String, dynamic>? _authorization = getAuthorizationHeader();
     if (_authorization != null) {
-      requestOptions = requestOptions.merge(headers: _authorization);
+      requestOptions = requestOptions.copyWith(headers: _authorization);
     }
     var response = await dio.patch(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
@@ -282,11 +268,11 @@ class HttpUtil {
   }
 
   /// restful delete 操作
-  Future delete(String path, {dynamic params, Options options}) async {
+  Future delete(String path, {dynamic params, Options? options}) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    Map<String, dynamic>? _authorization = getAuthorizationHeader();
     if (_authorization != null) {
-      requestOptions = requestOptions.merge(headers: _authorization);
+      requestOptions = requestOptions.copyWith(headers: _authorization);
     }
     var response = await dio.delete(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
@@ -294,11 +280,11 @@ class HttpUtil {
   }
 
   /// restful post form 表单提交操作
-  Future postForm(String path, {dynamic params, Options options}) async {
+  Future postForm(String path, {required dynamic params, Options? options}) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    Map<String, dynamic>? _authorization = getAuthorizationHeader();
     if (_authorization != null) {
-      requestOptions = requestOptions.merge(headers: _authorization);
+      requestOptions = requestOptions.copyWith(headers: _authorization);
     }
     var response = await dio.post(path,
         data: FormData.fromMap(params),
@@ -310,8 +296,8 @@ class HttpUtil {
 
 // 异常处理
 class ErrorEntity implements Exception {
-  int code;
-  String message;
+  int? code;
+  String? message;
   ErrorEntity({this.code, this.message});
 
   String toString() {

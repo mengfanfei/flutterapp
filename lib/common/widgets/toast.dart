@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_flutter_app/common/utils/utils.dart';
 
 Future<bool> toastInfo({
-  @required String msg,
+  required String msg,
   Color backgroundColor = Colors.black,
   Color textColor = Colors.white,
 }) async {

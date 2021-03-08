@@ -1,9 +1,9 @@
 /// 新闻分页 request
 class NewsPageListRequestEntity {
-  String categoryCode;
-  String channelCode;
-  String tag;
-  String keyword;
+  String? categoryCode;
+  String? channelCode;
+  String? tag;
+  String? keyword;
 
   NewsPageListRequestEntity({
     this.categoryCode,
@@ -15,11 +15,11 @@ class NewsPageListRequestEntity {
 
 /// 新闻分页 response
 class NewsPageListResponseEntity {
-  int counts;
-  int pagesize;
-  int pages;
-  int page;
-  List<NewsItem> items;
+  int? counts;
+  int? pagesize;
+  int? pages;
+  int? page;
+  List<NewsItem>? items;
 
   NewsPageListResponseEntity({
     this.counts,
@@ -44,18 +44,18 @@ class NewsPageListResponseEntity {
     "pagesize": pagesize,
     "pages": pages,
     "page": page,
-    "items": List<dynamic>.from(items.map((x) => x.toJson())),
+    "items": List<dynamic>.from(items!.map((x) => x.toJson())),
   };
 }
 
 class NewsItem {
-  String id;
-  String title;
-  String category;
-  String thumbnail;
-  String author;
-  DateTime addtime;
-  String url;
+  String? id;
+  String? title;
+  String? category;
+  String? thumbnail;
+  String? author;
+  DateTime? addtime;
+  String? url;
 
   NewsItem({
     this.id,
@@ -83,17 +83,17 @@ class NewsItem {
     "category": category,
     "thumbnail": thumbnail,
     "author": author,
-    "addtime": addtime.toIso8601String(),
+    "addtime": addtime!.toIso8601String(),
     "url": url,
   };
 }
 
 /// 新闻推荐 request
 class NewsRecommendRequestEntity {
-  String categoryCode;
-  String channelCode;
-  String tag;
-  String keyword;
+  String? categoryCode;
+  String? channelCode;
+  String? tag;
+  String? keyword;
 
   NewsRecommendRequestEntity({
     this.categoryCode,
@@ -105,13 +105,13 @@ class NewsRecommendRequestEntity {
 
 /// 新闻推荐 response
 class NewsRecommendResponseEntity {
-  String thumbnail;
-  String title;
-  String category;
-  DateTime addtime;
-  String author;
-  String url;
-  String id;
+  String? thumbnail;
+  String? title;
+  String? category;
+  DateTime? addtime;
+  String? author;
+  String? url;
+  String? id;
 
   NewsRecommendResponseEntity({
     this.thumbnail,
@@ -138,7 +138,7 @@ class NewsRecommendResponseEntity {
     "thumbnail": thumbnail,
     "title": title,
     "category": category,
-    "addtime": addtime.toIso8601String(),
+    "addtime": addtime!.toIso8601String(),
     "author": author,
     "url": url,
     "id": id,

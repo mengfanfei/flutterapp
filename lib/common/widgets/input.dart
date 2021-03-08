@@ -3,10 +3,10 @@ import 'package:my_flutter_app/common/utils/utils.dart';
 import 'package:my_flutter_app/common/values/values.dart';
 
 Widget inputTextEdit({
-  @required TextEditingController controller,
+  required TextEditingController controller,
   double marginTop = 15,
   TextInputType keyboardType = TextInputType.text,
-  String hintText,
+  String? hintText,
   bool isPassword = false,
 }) {
   return Container(
